@@ -173,7 +173,7 @@
             }
     
             // Fetch movie details
-            fetch(`http://localhost:3000/movie-details?movieId=${movieDetails}`)
+            fetch(`https://cine-kahani-backend.onrender.com/movie-details?movieId=${movieDetails}`)
                 .then(response => response.json())
                 .then(data => {
                     movieImageElement.src = data.imageURL;
@@ -208,7 +208,7 @@
                 isDownloading = true;
                 abortController = new AbortController();
     
-                fetch(`http://localhost:3000/download?movieId=${movieId}`, { signal: abortController.signal })
+                fetch(`https://cine-kahani-backend.onrender.com/download?movieId=${movieId}`, { signal: abortController.signal })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Download failed');

@@ -34,7 +34,7 @@ document.getElementById('search-fun2').addEventListener('click',()=>{
 document.addEventListener('DOMContentLoaded', async () => {
 
     try {
-        const response = await fetch('http://localhost:3000/api/user-visited', {
+        const response = await fetch('https://cine-kahani-backend.onrender.com/api/user-visited', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
         });

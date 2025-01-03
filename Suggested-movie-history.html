@@ -244,7 +244,7 @@
             async function fetchMovies() {
                 toggleSpinner(true); // Show spinner
                 try {
-                    const response = await fetch('http://localhost:3000/api/movies');
+                    const response = await fetch('https://cine-kahani-backend.onrender.com/api/movies');
                     if (!response.ok) throw new Error('Failed to fetch movies');
 
                     allMovies = await response.json();
@@ -319,7 +319,7 @@
             async function deleteMovie(id) {
                 toggleSpinner(true); // Show spinner
                 try {
-                    const response = await fetch(`http://localhost:3000/api/movies/${id}`, { method: 'DELETE' });
+                    const response = await fetch(`https://cine-kahani-backend.onrender.com/api/movies/${id}`, { method: 'DELETE' });
                     if (!response.ok) throw new Error('Failed to delete movie');
                     alert('Movie deleted successfully');
                     fetchMovies(); // Refresh the movie list after deletion

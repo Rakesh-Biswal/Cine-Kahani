@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         notFoundMessage.style.display = 'none';
         spinner.style.display = 'block';
         try {
-            const response = await fetch(`http://localhost:3000/api/search/movie`);
+            const response = await fetch(`https://cine-kahani-backend.onrender.com/api/search/movie`);
             const data = await response.json();
 
             if (data.movies && data.movies.length > 0) {

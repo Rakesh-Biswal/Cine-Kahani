@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     const serviceGrid = document.querySelector('.service-grid');
 
     try {
-        const response = await fetch('http://localhost:3000/api/movies');
+        const response = await fetch('https://cine-kahani-backend.onrender.com/api/movies');
         if (!response.ok) throw new Error('Failed to fetch movies');
 
         const movies = await response.json();
@@ -52,7 +52,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         serviceGrid.addEventListener('click', (e) => {
             if (e.target.classList.contains('buy-btn')) {
                 const movieName = e.target.getAttribute('data-movie-name');
-                window.location.href = `http://127.0.0.1:5500/dashboard.html?movieName=${encodeURIComponent(movieName)}`;
+                window.location.href = `dashboard.html?movieName=${encodeURIComponent(movieName)}`;
             }
         });
     } catch (error) {
