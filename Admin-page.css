@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1d1d4f, #009ffd);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding-top: 85px; */
+}
+.company-logo{
+    width: 100vw;
+    display: flex;
+    justify-content: left;
+    padding: 13px;
+    padding-bottom: 20px;
+}
+
+.company-logo img{
+   width: 100px;
+  height: 45px;
+   border-radius: 2px;
+   border: 1px solid rgba(227, 211, 211, 0.248);
+   
+   
+
+}
+
+.coin-info {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Profile info section */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 20px;
+    background: linear-gradient(135deg, #020101, #5b686f);
+    
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 10px rgb(46 30 30 / 28%);
+    width: 45vw;
+    height: 320px;
+    border: 1px solid rgba(0, 15, 16, 0.874);
+   
+
+}
+.profile-info:hover{
+    transition: transform 0.3s, box-shadow 0.3s;
+   transform:scale(103%);
+
+}
+
+.user-profile-photo {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    
+    animation: bounceIn 1.5s ease-in-out;
+    transform-origin: top center;
+   
+    cursor: pointer;
+   
+}
+
+.user-profile-photo:hover {
+    transform: scale(105%);
+}
+.profile-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px !important;
+    color: rgb(255, 255, 255) !important;
+    background-color: rgba(131, 247, 146, 0.067);
+    border-radius: 30px;
+}
+
+
+#id,#referrals ,#unvisited-link{
+
+    font-weight:700;
+    color:rgb(244, 255, 50);
+
+}
+
+.user-information div{
+    color: rgb(8, 248, 136);
+    margin:8px 0;
+    font-size: 19px;
+    font-weight: 700;
+    background-color: rgba(245, 247, 250, 0.03);
+    border-radius: 10px;
+    
+
+}
+
+.same {
+    margin-left: 2px;
+    color:rgb(244, 255, 50) !important;;
+}
+
+/* Services section */
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    padding: 20px;
+    gap: 15px;
+}
+
+.service-item {
+    width:100px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 14px;
+   
+    border: 2px solid rgba(0, 15, 16, 0.874);
+    /* background-color: #dce6e7e8; */
+  
+    background: linear-gradient(53deg, #e4abf5 0%, #c2ecb8 50%, #7bb394 100%);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.service-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.service-item img {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 5px;
+}
+
+.service-label {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Logout button */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    margin-top:30px ;
+   
+}
+
+.logout {
+    height: 40px;
+    width: 100px;
+    padding: 10px 20px;
+    background-color: #FF6347;
+    color: white;
+    border: none;
+    border-radius: 29px;
+    font-size: 17.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout:hover {
+    background-color: #FF4500;
+    transform: scale(1.1);
+}
+
+/* Assistance link */
+.assistance {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.assistance img {
+    height: 50px;
+    width: 50px;
+    transition: transform 0.3s ease;
+}
+
+.assistance img:hover {
+    transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Responsive design */
+
+
+/* Responsive design */
+@media (max-width: 770px) {
+    .profile-info {
+        height: 280px;
+        width: 92vw;
+    }
+   
+    #username {
+        font-size: 2px;
+        display: none;
+    }
+
+    .btn-container {
+        margin-top: 25px;
+    }
+
+    .assistance {
+        top: 10px;
+        right: 10px;
+    }
+
+  
+
+    .user-profile-photo {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-information div,
+    .wallet-info div {
+        font-size: 15px;
+    }
+
+    .services {
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .service-item {
+        width: 100px;
+        padding: 10px;
+        
+    }
+
+    .service-label {
+        margin-top: 3px;
+    }
+
+
+}

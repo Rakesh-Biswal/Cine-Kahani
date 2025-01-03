@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="Admin-page.css">
+    <!-- <style>
+        
+         .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.318);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .spinner {
+            border: 6px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #05135b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        } 
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style> -->
+</head>
+
+<body>
+
+    <div class="spinner-overlay" id="spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="company-logo">
+        <img src="cine-kahani-logo.png" alt="">
+    </div>
+    <section class="profile-info">
+        <img class="user-profile-photo" src="cine-kahani-logo.png" alt="a2z-entertainment logo">
+        <div class="user-information">
+            <div class="profile-name"><span id="usernames">Cine-Kahani</span></div>
+            <div><span>User Visited : </span><span id="user-visited" class="same">...</span></div>
+            <div><span>Paid Download : </span><span id="paid-download" class="same">...</span></div>
+            <div><span>Free Download : </span><span id="free-download" class="same">...</span></div>
+            <div class="balance-info"><span>Total Movies :</span><span id="total-movies" class="same">...</span></div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="service-item" id="allMovies">
+            <img src="all-movies.jpg" alt="">
+            <span class="service-label">All Movies</span>
+        </div>
+        <div class="service-item" id="uploadMovie">
+            <img src="upload-movie.webp" alt="">
+            <span class="service-label">Upload Movie</span>
+        </div>
+        <div class="service-item" id="officialSite">
+            <img src="official-website.jpeg" alt="">
+            <span class="service-label">Official Site</span>
+        </div>
+        <div class="service-item" id="Profit-Status">
+            <img src="profit-logo.png" alt="">
+            <span class="service-label">Profit Status</span>
+        </div>
+        <div class="service-item" id="paidMovies">
+            <img src="free-movie.png" alt="">
+            <span class="service-label">Free/Paid Movies</span>
+        </div>
+        <div class="service-item" id="createOffer">
+            <img src="create-offer-logo.png" alt="What'sAPp">
+            <span class="service-label">Create Offer</span>
+        </div>
+    </section>
+
+    <div class="btn-container">
+        <button class="logout" id="log">Logout</button>
+    </div>
+
+    <script>
+        document.getElementById('allMovies').addEventListener('click', () => {
+            window.location.href = '/Suggested-movie-history.html';
+        });
+
+        document.getElementById('uploadMovie').addEventListener('click', () => {
+            window.location.href = '/Suggested-movie-upload.html';
+        });
+
+        document.getElementById('officialSite').addEventListener('click', () => {
+            window.location.href = '/index.html';
+        });
+
+        document.getElementById('Profit-Status').addEventListener('click', () => {
+            alert('This site is under construction');
+        });
+
+        document.getElementById('paidMovies').addEventListener('click', () => {
+            alert('This site is under construction');
+        });
+
+        document.getElementById('createOffer').addEventListener('click', () => {
+            alert('This site is under construction');
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const userVisitedElement = document.getElementById('user-visited'); // Assuming 'id' is the element ID for 'User Visited'
+            const FreeDownload = document.getElementById('free-download');
+            const PaidDownload = document.getElementById('paid-download');
+            const TotalMovies = document.getElementById('total-movies');
+            try {
+                const response = await fetch('http://localhost:3000/api/user-visited');
+                const data = await response.json();
+                if (response.ok) {
+                    userVisitedElement.textContent = data.userVisited;
+                    FreeDownload.textContent = data.paidMovie;
+                    PaidDownload.textContent = data.freeMovie;
+                    TotalMovies.textContent = data.totalMovies;
+                } else {
+                    console.error('Error updating user visit count:', data.message);
+                }
+            } catch (error) {
+                console.error('Failed to fetch user visit count:', error);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

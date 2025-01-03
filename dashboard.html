@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="64x64" type="image/png">
+
+    <!-- Title and Primary Meta Tags -->
+    <title>A2Z Entertainment - Download Your Favorite Movies for Free</title>
+    <meta name="description"
+        content="A2Z Entertainment is your one-stop destination to find and download your favorite movies for free. Enjoy a vast collection of movies across genres, all available for instant download. Completely free to use and user-friendly.">
+    <meta name="keywords"
+        content="A2Z Entertainment, free movie downloads, movie downloader, download movies for free, favorite movies, online movies, free movie software, movie download site">
+    <meta name="author" content="A2Z Entertainment Team">
+
+    <!-- Open Graph Meta Tags (For Social Media Sharing) -->
+    <meta property="og:title" content="A2Z Entertainment - Unlimited Free Movie Downloads" />
+    <meta property="og:description"
+        content="Discover and download your favorite movies at A2Z Entertainment, a completely free-to-use platform offering a vast library of movies. Instant and easy downloads guaranteed!" />
+    <meta property="og:image" content="https://a2z-entertainment.com/assets/movie-download-banner.jpg" />
+    <meta property="og:url" content="https://a2z-entertainment.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A2Z Entertainment" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A2Z Entertainment - Free Movie Downloads for Everyone">
+    <meta name="twitter:description"
+        content="Enjoy hassle-free movie downloads with A2Z Entertainment. Choose from a wide range of genres and titles, all for free. Start exploring today!">
+    <meta name="twitter:image" content="https://a2z-entertainment.com/assets/twitter-movie-promo.jpg">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard-searchbar.css">
+
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="#" class="logo">Cine<span>Kahani</span></a>
+        </div>
+        <div class="nav-links desktop-links">
+            <span class="nav-item filter-btn" data-filter="all-movies">All Movie</span>
+            <span class="nav-item filter-btn" data-filter="free">Only Free</span>
+            <span class="nav-item filter-btn" data-filter="paid">Only Paid</span>
+            <span class="navbar-search-btn" id="nsb">
+                <span class="emoji">🔍</span>
+                Search
+                </a>
+        </div>
+        <div class="mobile-menu-icons">
+            <a href="#search" class="navbar-search-btn" id="sb">
+                <span class="emoji">🔍</span>
+                Search
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-box">
+            <span class="mobile-item filter-btn" data-filter="all-movies">All Movie</span>
+            <span class="mobile-item filter-btn" data-filter="free">Only Free</span>
+            <span class="mobile-item filter-btn" data-filter="paid">Only Paid</span>
+        </div>
+    </div>
+
+    <section id="search-section" class="search-section" style="display: none;">
+        <div class="srch-container">
+            <div class="search-bar-container">
+                <div style="display: flex; align-items: center; position: relative;">
+                    <form class="search-form" style="flex-grow: 1;">
+                        <input type="text" id="searchInput" class="search-bar-input"
+                            placeholder="Search for a worker or service...">
+                        <button id="searchButton" class="search-bar-btn" type="button">Search</button>
+                    </form>
+                    <button type="button" id="closeSearchBtn" class="close-btn">&#10005;</button>
+                </div>
+
+
+                <div id="serviceSuggestions" class="service-suggestions"></div>
+
+                <div id="notFoundMessage" class="not-found-message">
+                    <img src="not-found-logo.png" alt="Not Found Image">
+                    <p>Not Found</p>
+                </div>
+
+                <!-- Search History Dropdown -->
+                <ul id="searchHistoryList" class="search-history"></ul>
+            </div>
+
+            <!-- Spinner for loading effect -->
+            <div id="search-bar-spinner" class="search-bar-spinner"></div>
+
+            <svg style="display:none;">
+                <symbol id="remove-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </symbol>
+            </svg>
+
+        </div>
+    </section>
+
+
+
+
+    <!-- Spinner Overlay -->
+    <div class="spinner-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="service-grid"></div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo and Tagline -->
+            <div class="footer-logo">
+                <img src="banner.png" alt="Relax Packers & Movers Logo" />
+                <h2>CINE-KAHANI</h2>
+                <p class="tagline">Just search and Download</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="footer-links">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#hero">Search Services</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Address -->
+            <div class="footer-address">
+                <h3>Address</h3>
+                <address>
+                    Kalinga-Pal Rasol Dhenkanal,<br />
+                    Odisha, 759021
+                </address>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><strong>Powered By:</strong><a
+                        href="https://youtube.com/@a2zentertainment-99?si=wqUn_XOKMtz8czR8">A2Z Entertainment</a></p>
+                <p><strong>Phone:</strong> +91-8093964384</p>
+                <p><strong>Email:</strong> <a href="mailto:sahuasutosh26@gmail.com">Cine-Kahani Support</a></p>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>
+                Copyright © A2Z Entertainment | Developed by
+                <a href="tel:8093964384">Rakesh & Asutosh</a>
+            </p>
+            <div class="payment-icons">
+                <img src="visa-card.png" alt="Visa" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="dashboard.js"></script>
+    <script src="dashboard-search-bar.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const serviceGrid = document.querySelector('.service-grid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const spinnerOverlay = document.querySelector('.spinner-overlay');
+            let movies = [];
+
+            // Show Spinner
+            function showSpinner() {
+                spinnerOverlay.classList.add('active');
+            }
+
+            // Hide Spinner
+            function hideSpinner() {
+                spinnerOverlay.classList.remove('active');
+            }
+
+            // Fetch movies from the API
+            async function fetchMovies() {
+                showSpinner();
+                try {
+                    const response = await fetch('http://localhost:3000/api/movies');
+                    if (!response.ok) throw new Error('Failed to fetch movies');
+                    movies = await response.json();
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    hideSpinner();
+                }
+            }
+
+            // Generate Google Drive Auto-Download Link
+            function getDownloadLink(googleDriveLink) {
+                const fileIdMatch = googleDriveLink.match(/\/file\/d\/(.+?)\//);
+                return fileIdMatch ? fileIdMatch[1] : null; // Return file ID instead of full link
+            }
+
+            // Handle download button click
+            async function handleDownloadClick(movie) {
+                console.log('Download button clicked for:', movie);
+
+                const fileId = getDownloadLink(movie.movieLink);
+
+                if (!fileId) {
+                    console.error('Invalid Google Drive link:', movie.movieLink);
+                    alert('Error: Unable to process the download link.');
+                    return;
+                }
+
+                const statusPageURL = `movie-download-statusBar.html?movieId=${fileId}&movie=${movie._id}`; // Construct status page URL
+
+                if (movie.movieType === 'Free') {
+                    // Redirect to the status page for free movies
+                    window.location.href = statusPageURL;
+                } else if (movie.movieType === 'Paid') {
+                    // Implement Razorpay payment gateway logic
+                    const options = {
+                        key: 'rzp_live_mf2mDUZfA6cYHd',
+                        amount: movie.price * 100, // Amount in paise
+                        currency: 'INR',
+                        name: 'Movie Download',
+                        description: `Payment for ${movie.movieName}`,
+                        handler: function (response) {
+                            console.log('Payment successful:', response);
+                            // Redirect to the status page after successful payment
+                            window.location.href = statusPageURL;
+                        },
+                        prefill: {
+                            name: 'Rakesh Biswal',
+                            email: 'rb2306114@gmail.com',
+                            contact: '9938179834',
+                        },
+                        theme: {
+                            color: '#3399cc',
+                        },
+                    };
+
+                    const razorpay = new Razorpay(options);
+                    razorpay.open();
+                }
+            }
+
+
+            // Display filtered movies
+            function displayMovies(filteredMovies) {
+                serviceGrid.innerHTML = ''; // Clear existing cards
+                filteredMovies.forEach(movie => {
+                    const isFree = movie.movieType === 'Free';
+                    const buttonText = isFree
+                        ? `Download for Free`
+                        : `⬇️Get Movie ₹${movie.price}`;
+                    const buttonStyle = isFree
+                        ? 'background-color: #4caf50; color: white;'
+                        : 'background-color: #ff9800; color: white;';
+
+                    const movieType = movie.movieType;
+                    let boxText = '';
+                    let backgroundColor = '';
+                    let textColor = '';
+
+                    if (movieType === 'Free') {
+                        boxText = '❤ Free';
+                        backgroundColor = '#32CD32'; // Light green
+                        textColor = '#FFFFFF'; // White
+                    } else if (movieType === 'Paid') {
+                        boxText = `Paid ₹${movie.price}`;
+                        backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Red
+                        textColor = '#fff';
+                    }
+
+                    const cardHTML = `
+                        <div class="service-item">
+                        <div class="movie-type-box" style="background-color: ${backgroundColor}; color: ${textColor};">
+                            ${boxText}
+                        </div>
+                        <img src="${movie.imageURL}" alt="${movie.movieName}">
+                        <h3>${movie.movieName}</h3>
+                        <p>${movie.movieDescription}</p>
+                        <div class="service-buttons">
+                            <button class="details-btn">More Info 🔍</button>
+                            <button class="buy-btn" style="${buttonStyle}">${buttonText}</button>
+                        </div>
+                    </div>`;
+
+                    const cardElement = document.createElement('div');
+                    cardElement.innerHTML = cardHTML.trim();
+
+                    // Append the card to the service grid
+                    const card = cardElement.firstChild;
+                    serviceGrid.prepend(card);
+
+                    // Add event listener to the download button
+                    const downloadButton = card.querySelector('.buy-btn');
+                    if (downloadButton) {
+                        downloadButton.addEventListener('click', () => {
+                            handleDownloadClick(movie);
+                        });
+                    }
+                });
+            }
+
+
+            // Function to get URL parameters
+            function getURLParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            // Initial logic
+            async function init() {
+                const movieName = getURLParameter('movieName');
+                await fetchMovies(); // Fetch all movies from the backend
+
+                if (movieName) {
+                    // Filter for the specific movie
+                    const filteredMovie = movies.filter(movie => movie.movieName === decodeURIComponent(movieName));
+                    if (filteredMovie.length > 0) {
+                        document.querySelector('.footer').style.display = "none";
+                        document.querySelector('.services').style.paddingTop = "50px";
+                        displayMovies(filteredMovie); // Display only the matched movie
+                    } else {
+                        document.querySelector('.services').style.paddingTop = "80px";
+                        serviceGrid.innerHTML = `<p>No movie found with the name "${movieName}".</p>`;
+                    }
+                } else {
+                    document.querySelector('.services').style.paddingTop = "0px";
+                    document.querySelector('.footer').style.display = "block";
+                    // Display all movies if no query parameter is provided
+                    displayMovies(movies);
+                }
+            }
+
+            // Filter logic
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    showSpinner();
+                    const filter = button.getAttribute('data-filter');
+                    if (filter === 'free') {
+                        displayMovies(movies.filter(movie => movie.movieType === 'Free'));
+                    } else if (filter === 'paid') {
+                        displayMovies(movies.filter(movie => movie.movieType === 'Paid'));
+                    } else if (filter === 'all-movies') {
+                        displayMovies(movies);
+                    }
+                    hideSpinner();
+                });
+            });
+
+            // Initialize the page
+            init();
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

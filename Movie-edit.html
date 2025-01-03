@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f3f4f6, #74b9ff);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .edit-movie-page {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            text-align: center;
+        }
+
+        .edit-movie-page h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #0984e3;
+        }
+
+        .edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #636e72;
+        }
+
+        input,
+        textarea {
+            font-size: 1rem;
+            padding: 10px;
+            border: 1px solid #dfe6e9;
+            border-radius: 8px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #0984e3;
+            box-shadow: 0 0 5px rgba(9, 132, 227, 0.5);
+            outline: none;
+        }
+
+        /* Dropdown Styling for Movie Type */
+        #movie-type {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* On focus: Movie Type Dropdown */
+        #movie-type:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 5px rgba(108, 99, 255, 0.5);
+            outline: none;
+            background-color: #fff;
+        }
+
+        input:disabled {
+            background-color: #f1f1f1;
+            color: #999;
+            cursor: not-allowed;
+            border: 1px solid #ddd;
+        }
+
+
+        #save-button {
+            padding: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            background: #00b894;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #save-button:disabled {
+            background: #dfe6e9;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        #save-button:hover:enabled {
+            background: #00a26a;
+        }
+
+        #save-button:active:enabled {
+            transform: scale(0.95);
+        }
+
+        /* Responsive Design: Adjust for smaller screens */
+        @media (max-width: 768px) {
+            #movie-type {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+
+        /* Disabled state for form fields */
+        #movie-type:disabled {
+            background-color: #eaeaea;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Spinner styling */
+        .spinner-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 8px solid #f3f4f6;
+            border-top: 8px solid #0984e3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="spinner-overlay">
+        <div class="spinner"></div>
+    </div>
+    <section id="edit-movie-page" class="edit-movie-page">
+        <h2>Edit Movie Details</h2>
+        <form id="edit-movie-form" class="edit-form">
+            <div class="form-group">
+                <label for="image-url">Image URL</label>
+                <input type="url" id="image-url" name="imageUrl" placeholder="Enter Image URL" required>
+            </div>
+            <div class="form-group">
+                <label for="movie-name">Movie Name</label>
+                <input type="text" id="movie-name" name="movieName" placeholder="Enter Movie Name" required>
+            </div>
+            <div class="form-group">
+                <label for="movie-description">Movie Description</label>
+                <textarea id="movie-description" name="movieDescription" placeholder="Enter Movie Description" rows="4"
+                    required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="movie-link">Movie Link</label>
+                <input type="url" id="movie-link" name="movieLink" placeholder="Enter Movie Link" required>
+            </div>
+            <div class="form-group">
+                <label for="movie-type">Movie Type</label>
+                <select id="movie-type" name="movieType" required>
+                    <option value="Free">Free</option>
+                    <option value="Paid">Paid</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" placeholder="Enter Price" required>
+            </div>
+            <button type="submit" id="save-button" disabled>Save Changes</button>
+        </form>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const spinnerOverlay = document.querySelector('.spinner-overlay');
+            const form = document.getElementById('edit-movie-form');
+            const saveButton = document.getElementById('save-button');
+            const movieTypeSelect = document.getElementById('movie-type');
+            const priceInput = document.getElementById('price');
+            let initialFormState = {};
+
+            async function fetchMovieDetails(movieId) {
+                showSpinner();
+                try {
+                    const response = await fetch(`http://localhost:3000/api/movies/${movieId}`);
+                    if (!response.ok) throw new Error('Failed to fetch movie details');
+                    const movie = await response.json();
+                    populateForm(movie);
+                    initialFormState = { ...movie };
+                    togglePriceField(movie.movieType);
+                } catch (error) {
+                    console.error(error);
+                    alert('Error fetching movie details');
+                } finally {
+                    hideSpinner();
+                }
+            }
+
+            function showSpinner() {
+                spinnerOverlay.style.display = 'flex';
+            }
+
+            function hideSpinner() {
+                spinnerOverlay.style.display = 'none';
+            }
+
+            function populateForm(movie) {
+                document.getElementById('image-url').value = movie.imageURL;
+                document.getElementById('movie-name').value = movie.movieName;
+                document.getElementById('movie-description').value = movie.movieDescription;
+                document.getElementById('movie-link').value = movie.movieLink;
+                document.getElementById('movie-type').value = movie.movieType;
+                document.getElementById('price').value = movie.price;
+            }
+
+            function togglePriceField(movieType) {
+                if (movieType === 'Free') {
+                    priceInput.disabled = true;
+                    priceInput.value = '';
+                } else {
+                    priceInput.disabled = false;
+                }
+            }
+
+            form.addEventListener('input', () => {
+                const isChanged = Array.from(new FormData(form).entries()).some(
+                    ([key, value]) => initialFormState[key] !== value
+                );
+                saveButton.disabled = !isChanged;
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const movieId = new URLSearchParams(window.location.search).get('id');
+                const formData = new FormData(form);
+                const updatedData = Object.fromEntries(formData.entries());
+
+                if (updatedData.movieType === 'Free') {
+                    updatedData.price = null; // Set price to null in the database
+                }
+
+                showSpinner();
+                try {
+                    const response = await fetch(`http://localhost:3000/api/movies/${movieId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updatedData),
+                    });
+                    if (!response.ok) throw new Error('Failed to update movie');
+                    hideSpinner();
+                    alert('Movie details updated successfully');
+                    window.location.href = '/Suggested-movie-history.html';
+                } catch (error) {
+                    console.error(error);
+                    alert('Error updating movie details');
+                } finally {
+                    hideSpinner();
+                }
+            });
+
+            movieTypeSelect.addEventListener('change', (e) => {
+                const selectedType = e.target.value;
+                togglePriceField(selectedType);
+            });
+
+            const movieId = new URLSearchParams(window.location.search).get('id');
+            if (movieId) fetchMovieDetails(movieId);
+        });
+    </script>
+
+</body>
+
+</html>

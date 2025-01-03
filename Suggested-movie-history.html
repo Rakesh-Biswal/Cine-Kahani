@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Movie History</title>
+    <link rel="stylesheet" href="Suggested-movie-history-nav.css">
+    <style>
+        /* General reset for better styling */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(71, 82, 78);
+        }
+
+        .admin-history {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5px;
+
+            text-align: center;
+            transition: all 0.6s ease-out;
+        }
+
+        .admin-history h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #e7e31f;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+
+        }
+
+        .card {
+            background: #fff;
+            color: #333;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            width: 330px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            position: relative;
+            /* Add this line to make the image the reference point for positioning the box */
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+
+        .card p {
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .card-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .card-buttons button {
+            padding: 10px;
+            width: 45%;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #fff;
+            transition: background 0.3s;
+        }
+
+        .card-buttons .edit-btn {
+            background: #6c63ff;
+        }
+
+        .card-buttons .edit-btn:hover {
+            background: #5548c8;
+        }
+
+        .card-buttons .delete-btn {
+            background: #e74c3c;
+        }
+
+        .card-buttons .delete-btn:hover {
+            background: #c0392b;
+        }
+
+        /* Spinner styles */
+        #spinner {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: none;
+        }
+
+        .triangle-spinner {
+            width: 50px;
+            height: 50px;
+            position: relative;
+            animation: rotate 1.5s linear infinite;
+        }
+
+        .triangle-spinner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 25px 43px 25px;
+            border-color: transparent transparent #e7e31f transparent;
+            animation: pop-up 1s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+                border-color: transparent transparent #e7e31f transparent;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                border-color: transparent transparent #91ff00 transparent;
+            }
+        }
+
+        @keyframes pop-up {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .movie-type-box {
+            position: absolute;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 1rem;
+            z-index: 1;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .card-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="#" class="logo">Cine<span>Kahani</span></a>
+        </div>
+        <div class="nav-links desktop-links">
+            <a href="#recent" class="nav-item">Only Paid</a>
+            <a href="#free-movies" class="nav-item">Only Free</a>
+            <a href="#about-us" class="nav-item">All</a>
+            <a href="#dashboard" class="dashboard-btn">Admin</a>
+        </div>
+        <div class="mobile-menu-icons">
+            <a href="#dashboard" class="dashboard-btn">Admin</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-box">
+            <a href="#recent" class="mobile-item">Only Paid</a>
+            <a href="#free-movies" class="mobile-item">Only Free</a>
+            <a href="#about-us" class="mobile-item">All</a>
+        </div>
+    </div>
+
+
+    <div id="spinner">
+        <div class="triangle-spinner"></div>
+    </div>
+    <section id="admin-history" class="admin-history">
+        <h2>Movie Upload History</h2>
+        <div class="card-grid" id="card-grid"></div>
+    </section>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const cardGrid = document.getElementById('card-grid');
+            const spinner = document.getElementById('spinner');
+            const navLinks = document.querySelectorAll('.nav-item, .mobile-item');
+
+            let allMovies = []; // To store all fetched movies for filtering
+
+            function toggleSpinner(show) {
+                spinner.style.display = show ? 'block' : 'none';
+            }
+
+            async function fetchMovies() {
+                toggleSpinner(true); // Show spinner
+                try {
+                    const response = await fetch('http://localhost:3000/api/movies');
+                    if (!response.ok) throw new Error('Failed to fetch movies');
+
+                    allMovies = await response.json();
+                    displayMovies(allMovies); // Display all movies initially
+                } catch (error) {
+                    console.error(error);
+                } finally {
+                    toggleSpinner(false); // Hide spinner
+                }
+            }
+
+            function displayMovies(movies) {
+                cardGrid.innerHTML = ''; // Clear existing cards
+
+                movies.forEach(movie => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    const movieType = movie.movieType;
+                    let boxText = '';
+                    let backgroundColor = '';
+                    let textColor = '';
+
+                    if (movieType === 'Free') {
+                        boxText = 'Free';
+                        backgroundColor = '#32CD32'; // Light green
+                        textColor = '#FFFFFF'; // White
+                    } else if (movieType === 'Paid') {
+                        boxText = `Paid ₹${movie.price}`;
+                        backgroundColor = 'rgba(255, 0, 0, 0.8)'; // Red
+                        textColor = '#fff';
+                    }
+
+                    card.innerHTML = `
+                        <div class="movie-type-box" style="background-color: ${backgroundColor}; color: ${textColor};">
+                            ${boxText}
+                        </div>
+                        <img src="${movie.imageURL}" alt="${movie.movieName}">
+                        <h3>${movie.movieName}</h3>
+                        <p>${movie.movieDescription}</p>
+                        <div class="card-buttons">
+                            <button class="edit-btn" data-id="${movie._id}">Edit</button>
+                            <button class="delete-btn" data-id="${movie._id}">Delete</button>
+                        </div>
+                    `;
+                    cardGrid.appendChild(card);
+                });
+
+                attachButtonListeners();
+            }
+
+            function attachButtonListeners() {
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const movieId = button.getAttribute('data-id');
+                        if (confirm('Are you sure you want to delete this movie?')) {
+                            deleteMovie(movieId);
+                        }
+                    });
+                });
+
+                const editButtons = document.querySelectorAll('.edit-btn');
+                editButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const movieId = button.getAttribute('data-id');
+                        window.location.href = `/Movie-edit.html?id=${movieId}`;
+                    });
+                });
+            }
+
+            async function deleteMovie(id) {
+                toggleSpinner(true); // Show spinner
+                try {
+                    const response = await fetch(`http://localhost:3000/api/movies/${id}`, { method: 'DELETE' });
+                    if (!response.ok) throw new Error('Failed to delete movie');
+                    alert('Movie deleted successfully');
+                    fetchMovies(); // Refresh the movie list after deletion
+                } catch (error) {
+                    console.error(error);
+                    alert('Error deleting movie');
+                } finally {
+                    toggleSpinner(false); // Hide spinner
+                }
+            }
+
+            // Filter movies based on type
+            function filterMovies(filterType) {
+                if (filterType === 'All') {
+                    displayMovies(allMovies);
+                } else {
+                    const filteredMovies = allMovies.filter(movie => movie.movieType === filterType);
+                    displayMovies(filteredMovies);
+                }
+            }
+
+            // Add event listeners to navbar links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Prevent default anchor behavior
+                    const filterType = event.target.textContent.includes('Paid') ? 'Paid' :
+                        event.target.textContent.includes('Free') ? 'Free' : 'All';
+                    filterMovies(filterType);
+                });
+            });
+
+            fetchMovies(); // Initial fetch to load all movies
+        });
+    </script>
+    <script>
+
+        // JS code for navbar-scroll view functionality
+        let lastScrollTop = 0;
+        const header = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', function () {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll > lastScrollTop) {
+                // Scroll Down - Hide the navbar
+                header.classList.add('hide-navbar');
+            } else {
+                // Scroll Up - Show the navbar
+                header.classList.remove('hide-navbar');
+            }
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+        });
+
+
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navItems = document.querySelectorAll('.nav-item, .mobile-item');
+
+        // Toggle mobile menu on hamburger click
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('open');
+        });
+
+        // Reset hamburger and mobile menu on nav item click
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                hamburger.classList.remove('open');
+            });
+        });
+
+    </script>
+</body>
+
+</html>

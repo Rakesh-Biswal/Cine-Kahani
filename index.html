@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="relax-smart-solution-small-logo-removebg.png" sizes="64x64" type="image/png">
+
+    <!-- Title and Primary Meta Tags -->
+    <title>A2Z Entertainment - Download Your Favorite Movies for Free</title>
+    <meta name="description"
+        content="A2Z Entertainment is your one-stop destination to find and download your favorite movies for free. Enjoy a vast collection of movies across genres, all available for instant download. Completely free to use and user-friendly.">
+    <meta name="keywords"
+        content="A2Z Entertainment, free movie downloads, movie downloader, download movies for free, favorite movies, online movies, free movie software, movie download site">
+    <meta name="author" content="A2Z Entertainment Team">
+
+    <!-- Open Graph Meta Tags (For Social Media Sharing) -->
+    <meta property="og:title" content="A2Z Entertainment - Unlimited Free Movie Downloads" />
+    <meta property="og:description"
+        content="Discover and download your favorite movies at A2Z Entertainment, a completely free-to-use platform offering a vast library of movies. Instant and easy downloads guaranteed!" />
+    <meta property="og:image" content="https://a2z-entertainment.com/assets/movie-download-banner.jpg" />
+    <meta property="og:url" content="https://a2z-entertainment.com" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="A2Z Entertainment" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A2Z Entertainment - Free Movie Downloads for Everyone">
+    <meta name="twitter:description"
+        content="Enjoy hassle-free movie downloads with A2Z Entertainment. Choose from a wide range of genres and titles, all for free. Start exploring today!">
+    <meta name="twitter:image" content="https://a2z-entertainment.com/assets/twitter-movie-promo.jpg">
+
+
+
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="navbarStyle.css">
+    <link rel="stylesheet" href="dashboard-searchbar.css">
+
+</head>
+
+
+<body>
+
+    <!-- Navbar Section -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="#" class="logo">Cine<span>Kahani</span></a>
+        </div>
+        <div class="nav-links desktop-links">
+            <a href="#recent" class="nav-item">Recent Uploaded</a>
+            <a href="#free-movies" class="nav-item">Free Movies</a>
+            <a href="#about-us" class="nav-item">Paid Movies</a>
+            <a href="/dashboard.html" class="dashboard-btn">Dashboard</a>
+        </div>
+        <div class="mobile-menu-icons">
+            <a href="/dashboard.html" class="dashboard-btn">Dashboard</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-box">
+            <a href="#recent" class="mobile-item">Recent Uploaded</a>
+            <a href="#free-movies" class="mobile-item">Free Movies</a>
+            <a href="#about-us" class="mobile-item">About Us</a>
+        </div>
+    </div>
+
+    <section id="search-section" class="search-section" style="display: none;">
+        <div class="srch-container">
+            <div class="search-bar-container">
+                <div style="display: flex; align-items: center; position: relative;">
+                    <form class="search-form" style="flex-grow: 1;">
+                        <input type="text" id="searchInput" class="search-bar-input"
+                            placeholder="Search for a worker or service...">
+                        <button id="searchButton" class="search-bar-btn" type="button">Search</button>
+                    </form>
+                    <button type="button" id="closeSearchBtn" class="close-btn">&#10005;</button>
+                </div>
+
+
+                <div id="serviceSuggestions" class="service-suggestions"></div>
+
+                <div id="notFoundMessage" class="not-found-message">
+                    <img src="not-found-logo.png" alt="Not Found Image">
+                    <p>Not Found</p>
+                </div>
+
+                <!-- Search History Dropdown -->
+                <ul id="searchHistoryList" class="search-history"></ul>
+            </div>
+
+            <!-- Spinner for loading effect -->
+            <div id="search-bar-spinner" class="search-bar-spinner"></div>
+
+            <svg style="display:none;">
+                <symbol id="remove-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                    </path>
+                </symbol>
+            </svg>
+
+        </div>
+    </section>
+
+
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Movie Library <br> Free and Unlimited!</h1>
+            <p class="hero-subtitle">No limits. No subscriptions. Just your favorite movies!</p>
+            <div class="search-bar" id="search-fun2">
+                <input type="text" placeholder="Search movies..." class="search-input" />
+                <button class="search-btn" id="openSearchBtn">Search</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="tv-watching-cartoon-removebg-preview.png" alt="Movie Downloads" />
+        </div>
+    </section>
+
+
+
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2>Suggested For You</h2>
+        <div class="service-grid">
+            <!-- Card will display in a dynamic manner -->
+        </div>
+    </section>
+
+
+
+
+
+    <!-- Q&A Section -->
+    <section id="qa" class="qa">
+        <h2>Q&A Section</h2>
+        <div class="qa-grid">
+
+            <div class="qa-item">
+                <h3>Is this movie download service completely free?</h3>
+                <div class="qa-answer">
+                    <p>Yes! Our platform offers 100% free movie downloads. There are no hidden charges or subscription
+                        fees—just browse, select, and download your favorite movies effortlessly.</p>
+                </div>
+            </div>
+
+            <!-- Q&A Item 2: How do I search for and download a movie? -->
+            <div class="qa-item">
+                <h3>How do I search for and download a movie?</h3>
+                <div class="qa-answer">
+                    <p>Simply use our search bar to find the movie you want. Click on the download button, and your
+                        movie will be ready to save to your device in just a few moments.</p>
+                </div>
+            </div>
+
+            <!-- Q&A Item 3: What types of movies are available? -->
+            <div class="qa-item">
+                <h3>What types of movies are available?</h3>
+                <div class="qa-answer">
+                    <p>We offer a wide range of movies, including the latest blockbusters, classics, regional films, and
+                        popular international titles, all in high-quality formats.</p>
+                </div>
+            </div>
+
+            <!-- Q&A Item 4: Do I need to create an account to download movies? -->
+            <div class="qa-item">
+                <h3>Do I need to create an account to download movies?</h3>
+                <div class="qa-answer">
+                    <p>No! You can start downloading movies right away without creating an account</p>
+                </div>
+            </div>
+
+            <!-- Q&A Item 5: Is the download process safe and secure? -->
+            <div class="qa-item">
+                <h3>Is the download process safe and secure?</h3>
+                <div class="qa-answer">
+                    <p>Absolutely! Our platform uses secure download links to ensure your safety. We prioritize
+                        providing a smooth and reliable experience free from malicious threats.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- About Us Section -->
+    <section id="about-us" class="about-us">
+        <h2>About Us</h2>
+        <p>A2Z Entertainment is your go-to platform for free and easy movie downloads. With a vast library spanning all
+            genres and languages, we make entertainment accessible to everyone. Enjoy fast downloads, user-friendly
+            navigation, and high-quality movies—all at no cost!</p>
+        <a href="#contact" class="btn">Contact Us</a>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message"></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Logo and Tagline -->
+            <div class="footer-logo">
+                <img src="banner.png" alt="Relax Packers & Movers Logo" />
+                <h2>CINE-KAHANI</h2>
+                <p class="tagline">Just search and Download</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Pinterest"><i class="fab fa-pinterest"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Useful Links -->
+            <div class="footer-links">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#hero">Search Services</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <!-- Address -->
+            <div class="footer-address">
+                <h3>Address</h3>
+                <address>
+                    Kalinga-Pal Rasol Dhenkanal,<br />
+                    Odisha, 759021
+                </address>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p><strong>Powered By:</strong><a
+                        href="https://youtube.com/@a2zentertainment-99?si=wqUn_XOKMtz8czR8">A2Z Entertainment</a></p>
+                <p><strong>Phone:</strong> +91-8093964384</p>
+                <p><strong>Email:</strong> <a href="mailto:sahuasutosh26@gmail.com">Cine-Kahani Support</a></p>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>
+                Copyright © A2Z Entertainment | Developed by
+                <a href="tel:8093964384">Rakesh & Asutosh</a>
+            </p>
+            <div class="payment-icons">
+                <img src="visa-card.png" alt="Visa" />
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <script src="dashboard-search-bar.js"></script>
+    <script src="service-section.js"></script>
+    <script></script>
+
+</body>
+
+</html>
